@@ -6,7 +6,30 @@ retroProject {
     dialect = "KickAssembler"
     dialectVersion = "5.23"
     libDirs = [".ra/deps/c64lib"]
+    includes = ["demo.asm"]
 
     libFromGitHub("c64lib/common", "0.3.0")
     libFromGitHub("c64lib/chipset", "0.3.0")
+}
+
+preprocess {
+    charpad {
+      input = file("bomba.ctm")
+      useBuildDir = false
+      outputs {
+        meta {
+          dialect = "KickAssembler"
+          output = file("bomba-meta.asm")
+        }
+        charset {
+          output = file("bomba-charset.bin")
+        }
+        charsetColours {
+          output = file("bomba-colours.bin")
+        }
+        charsetScreenColours {
+          output = file("bomba-screen-colours.bin")
+        }
+      }
+    }
 }
